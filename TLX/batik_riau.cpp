@@ -15,14 +15,30 @@ void fastIO(){
 	cout.tie(0);
 }
  void solve() {
-     priority_queue<int> delta;
-     
+     string s;
+     cin>>s;
+     int n;
+     cin>>n;
+     int arr[n+1];
+     rep(i,0,n) cin>>arr[i];
+     ll ans=0;
+     ll curr=1;
+     rep(i,1,n) {
+         if (arr[i]!=arr[i-1]) {
+             ans+=curr*(curr+1)>>1;
+             curr=0;
+         }
+         curr++;
+     }
+     ans+=curr*(curr+1)>>1;
+     cout<<ans<<endl;
  }
 
  int main() {
      fastIO();
      int tc;
-     cin>>tc;
+     tc=1;
+     //cin>>tc;
      while(tc--) {
         solve(); 
      }

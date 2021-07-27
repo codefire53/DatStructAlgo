@@ -9,20 +9,35 @@
 #define init(a, b) memset(a, b, sizeof a)
 using namespace std;
 typedef vector<int> vi;
+
 void fastIO(){
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
 }
+
  void solve() {
-     priority_queue<int> delta;
-     
+    int n;
+    priority_queue<int> stone;
+    cin>>n;
+    while(n--){
+        int op;
+        cin>>op;
+        if(op==1) {
+            int val;
+            cin>>val;
+            stone.push(val);
+        }
+        else if(op==2) cout<<stone.top()<<endl;
+        
+        else stone.pop();
+    }
  }
 
  int main() {
      fastIO();
      int tc;
-     cin>>tc;
+     tc=1;
      while(tc--) {
         solve(); 
      }

@@ -14,8 +14,9 @@ typedef vector<string> vs;
 const int maxn=1e5+1;
 
 vs ans;
-map<string, vs> adj;
-map<string, bool> visited;
+vi adj[maxn];
+string name[maxn];
+bool visited[maxn];
 
 void fastIO(){
 	ios_base::sync_with_stdio(0);
@@ -23,41 +24,58 @@ void fastIO(){
 	cout.tie(0);
 }
 
-bool dfs(string pos, string goal) {
-    ans.pb(pos);
-    visited[pos] = 1;
+bool dfs(int pos, int goal) {
     if (pos==goal) {
-        return 1;
+        return true;
     }
-    bool found = 0;
-    for(string dst: adj[pos]) {
-        if (!visited[dst]) {
-            found=dfs(dst, goal);
-            if (found) return 1;
+    visited[pos] = 1;
+    rep(i,0,adj[pos].size()) {
+        if (!visited[adj[pos][i]]) {
+            ans.pb(name[adj[pos][i]]);
+            bool found=dfs(adj[pos][i], goal);
+            if (found) return true;
+            ans.ppb();
         }
     }
-    ans.ppb();
-    return found;
+    return false;
 }
 
 void solve() {
     map<string, int> code;
+    int idx=1;
     int n,m;
     cin>>n>>m;
     rep(i,0,m) {
         string src,dst;
         cin>>src>>dst;
-        adj[src].pb(dst);
+        if(code[src]==0) {
+            code[src]=idx;
+            name[idx]=src;
+            idx++;
+        }
+        if(code[dst]==0) {
+            code[dst]=idx;
+            name[idx]=dst;
+            idx++;
+        }
+        adj[code[src]].pb(code[dst]);
     }
     string name1,name2;
     cin>>name1>>name2;
-    if(dfs(name1, name2)) {
-        for(auto spec: ans) cout<<spec<<endl;
+    ans.pb(name1);
+    if(dfs(code[name1], code[name2])) {
+        for(auto s: ans) {
+            cout<<s<<endl;
+        }
         return;
     }
-    visited.clear();
-    if(dfs(name2, name1)) {
-        for(auto spec: ans) cout<<spec<<endl;
+    ans.clear();
+    reset(visited);
+    ans.pb(name2);
+    if(dfs(code[name2], code[name1])) {
+        for(auto s: ans) {
+            cout<<s<<endl;
+        }
         return;
     }
     cout<<"TIDAK MUNGKIN\n";
