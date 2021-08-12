@@ -34,7 +34,8 @@ int toDec(stack<int> bins) }{
  void solve() {
      int a,b;
      cin>>a>>b;
-    cout<<a^b<<endl;
+     int ans=a^b;
+    cout<<ans<<endl;
  }
 
  int main() {

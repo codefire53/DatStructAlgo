@@ -8,35 +8,35 @@
 #define reset(a) memset(a, 0, sizeof a)
 #define init(a, b) memset(a, b, sizeof a)
 using namespace std;
+vector<pair<int, pair<int, int>>> edges;
+unordered_map<int, int> rem;
 typedef vector<int> vi;
 void fastIO(){
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
 }
-/*
-stack<int> toBins(int num) {
-    stack<int> ans;
-    while(num > 0) {
-        ans.push(num%2);
-        num/=2;
-    }
-}
-int toDec(stack<int> bins) }{
-    int ans=0;
-    int mul=1;
-    while(!bins.empty()) {
-        ans+=bins.top()*mul;
-        mul*=2;
-    }
-    return ans;
-}*/
  void solve() {
-     int a,b;
-     cin>>a>>b;
-    cout<<a^b<<endl;
+     int n.m;
+     cin>>n>>m;
+     rep(i,0,n) {
+         int par,chd,cst;
+         cin>>par>>chd>>cst;
+         edges.pb({cst, {par,chd}});
+     }
+     sort(edges, edges+n);
+     int ans=0;
+    rep(i,0,n) {
+        if(rem[edges[0].se.fi]==0){
+            ans++;
+            rem[edges[0].se.fi]=m;
+        }
+        rem[edges[0].se.fi]--;
+        rem[edges[0].se.se]+=m;
+    }
+    cout<<ans<<endl;
  }
-
+ 
  int main() {
      fastIO();
      int tc;
